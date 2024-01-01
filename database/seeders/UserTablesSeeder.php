@@ -1,0 +1,30 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\User;
+
+class UserTablesSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        User::create([
+            'name' => 'Andres',
+            'email' => 'andres_@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('12345678'),
+            'cedula' => '040000463',
+            'address' => '6Av. Universitaria',
+            'phone' => '3144743140',
+            'role' => 'admin',
+        ]);
+
+        User::factory()
+            ->count(50)
+            ->create();
+    }
+}

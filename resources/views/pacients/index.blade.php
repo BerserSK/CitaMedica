@@ -6,10 +6,10 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">Especialidades</h3>
+                  <h3 class="mb-0">Pacientes</h3>
                 </div>
                 <div class="col text-right">
-                  <a href="{{ url('/especialidades/create') }}" class="btn btn-sm btn-primary">Nueva Especialidad</a>
+                  <a href="{{ url('/pacientes/create') }}" class="btn btn-sm btn-primary">Nueva Paciente</a>
                 </div>
               </div>
             </div>
@@ -26,24 +26,32 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Cedula</th>
+                    <th scope="col">Rol</th>
                     <th scope="col">Opciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($specialties as $especialidad)
+                  @foreach($pacients as $paciente)
                   <tr>
                     <th scope="row">
-                      {{ $especialidad->name }}
+                      {{ $paciente->name }}
                     </th>
                     <td>
-                      {{ $especialidad->description }}
+                      {{ $paciente->email }}
                     </td>
                     <td>
-                      <form action="{{ url('/especialidades/'.$especialidad->id)}}" method="POST">
+                      {{ $paciente->cedula }}
+                    </td>
+                    <td>
+                      {{ $paciente->role }}
+                    </td>
+                    <td>
+                      <form action="{{ url('/pacientes/'.$paciente->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <a href="{{ url('/especialidades/'.$especialidad->id.'/edit')}}" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="{{ url('/pacientes/'.$paciente->id.'/edit')}}" class="btn btn-sm btn-primary">Editar</a>
                         <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
                       </form>
                     </td>
@@ -51,6 +59,9 @@
                   @endforeach
                 </tbody>
               </table>
+            </div>
+            <div class="card-body">
+              {{ $pacients->links() }}
             </div>
     </div>
 
