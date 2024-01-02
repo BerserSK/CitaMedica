@@ -37,6 +37,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function specialties(){
+
+        return $this->belongsToMany(Specialty::class);
+    }
+
     /**
      * The attributes that should be cast.
      *

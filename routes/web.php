@@ -21,18 +21,31 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Rutas Especialidades
-Route::get('/especialidades', [App\Http\Controllers\SpecialityController::class, 'index']);
+Route::middleware(['auth', 'admin'])->group(function () {
+    
+    //Rutas Especialidades
+    Route::get('/especialidades', [App\Http\Controllers\admin\SpecialityController::class, 'index']);
 
-Route::get('/especialidades/create', [App\Http\Controllers\SpecialityController::class, 'create']);
-Route::get('/especialidades/{specialty}/edit', [App\Http\Controllers\SpecialityController::class, 'edit']);
-Route::post('/especialidades', [App\Http\Controllers\SpecialityController::class, 'sendData']);
+    Route::get('/especialidades/create', [App\Http\Controllers\admin\SpecialityController::class, 'create']);
+    Route::get('/especialidades/{specialty}/edit', [App\Http\Controllers\admin\SpecialityController::class, 'edit']);
+    Route::post('/especialidades', [App\Http\Controllers\admin\SpecialityController::class, 'sendData']);
 
-Route::put('/especialidades/{specialty}', [App\Http\Controllers\SpecialityController::class, 'update']);
-Route::delete('/especialidades/{specialty}', [App\Http\Controllers\SpecialityController::class, 'destroy']);
+    Route::put('/especialidades/{specialty}', [App\Http\Controllers\admin\SpecialityController::class, 'update']);
+    Route::delete('/especialidades/{specialty}', [App\Http\Controllers\admin\SpecialityController::class, 'destroy']);
 
-//Rutas Medicos
-Route::resource('medicos', 'App\Http\Controllers\DoctorController');
+    //Rutas Medicos
+    Route::resource('medicos', 'App\Http\Controllers\admin\DoctorController');
 
-//Rutas Pacientes
-Route::resource('pacientes', 'App\Http\Controllers\PacientController');
+    //Rutas Pacientes
+    Route::resource('pacientes', 'App\Http\Controllers\admin\PacientController');
+
+});
+
+Route::middleware(['auth', 'doctor'])->group(function () {
+    Route::get('/horario', [App\Http\Controllers\doctor\HorarioController::class, 'edit']);
+    Route::post('/horario', [App\Http\Controllers\doctor\HorarioController::class, 'store']);
+});
+
+Route::get('/reservarcitas/create', [App\Http\Controllers\appointmentController::class, 'create']);
+Route::post('/miscitas', [App\Http\Controllers\appointmentController::class, 'store']);
+

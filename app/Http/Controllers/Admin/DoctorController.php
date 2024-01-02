@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Models\Specialty;
+
 
 class DoctorController extends Controller
 {
@@ -22,7 +25,9 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view('doctors.create');
+        $specialties = Specialty::all();
+
+        return view('doctors.create', compact('specialties'));
         //
     }
 
@@ -31,6 +36,8 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
+
         $rules = [
             'name' => 'required|min:3',
             'email' => 'required|email',

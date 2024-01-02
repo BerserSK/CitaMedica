@@ -16,6 +16,8 @@
   <link href="{{asset('js/plugins/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="{{asset('css/argon-dashboard.css?v=1.1.2')}}" rel="stylesheet" />
+
+  @yield('styles')
 </head>
 
 <body class="">
@@ -129,6 +131,8 @@
   <!--   Optional JS   -->
   <script src="{{asset('js/plugins/chart.js/dist/Chart.min.js')}}"></script>
   <script src="{{asset('js/plugins/chart.js/dist/Chart.extension.js')}}"></script>
+
+  @yield('scripts')
   <!--   Argon JS   -->
   <script src="{{asset('js/argon-dashboard.min.js?v=1.1.2')}}"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
